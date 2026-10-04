@@ -1,0 +1,2576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Natik Arabic Learning Portal · Subtopic Assessment & Grading</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f3ec;
+  --card: #ffffff;
+  --ink: #17283d;
+  --mute: #5f6f80;
+  --line: #dcd8cb;
+  --navy: #1d4373;
+  --navy-dark: #122d50;
+  --navy-light: #eaf1f8;
+  --gold: #b8903f;
+  --gold-light: #fef8eb;
+  --green: #2d8a4e;
+  --green-light: #eaf6ee;
+  --red: #c0392b;
+  --red-light: #fdf2f2;
+  --shadow-sm: 0 2px 8px rgba(23, 40, 61, 0.06);
+  --shadow-md: 0 6px 20px rgba(23, 40, 61, 0.10);
+  --shadow-lg: 0 12px 36px rgba(23, 40, 61, 0.14);
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1824;
+    --card: #172538;
+    --ink: #e8eef5;
+    --mute: #9cb0c5;
+    --line: #293d54;
+    --navy: #7ba6e2;
+    --navy-dark: #a2c4f5;
+    --navy-light: #1f334d;
+    --gold: #d8af5c;
+    --gold-light: #28251e;
+    --green: #48bb78;
+    --green-light: #1b3829;
+    --red: #f56565;
+    --red-light: #3b1d22;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+    --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.35);
+    --shadow-lg: 0 12px 36px rgba(0, 0, 0, 0.50);
+  }
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.ar {
+  font-family: 'Amiri', 'Noto Naskh Arabic', serif;
+  direction: rtl;
+}
+
+/* Header */
+header.app-header {
+  background: var(--card);
+  border-bottom: 4px solid var(--gold);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.brand-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.brand-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--navy), var(--gold));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+.brand-title h1 {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--navy);
+  line-height: 1.2;
+}
+.brand-title p {
+  font-size: 0.82rem;
+  color: var(--mute);
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.student-pill {
+  background: var(--navy-light);
+  color: var(--navy);
+  padding: 6px 14px;
+  border-radius: 99px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  border: 1px solid color-mix(in srgb, var(--navy) 25%, transparent);
+}
+.student-pill:hover {
+  filter: brightness(0.95);
+}
+
+/* Layout */
+main.main-content {
+  max-width: 900px;
+  margin: 24px auto 40px;
+  padding: 0 16px;
+  flex-grow: 1;
+  width: 100%;
+}
+
+/* Tab Navigation */
+.tabs-nav {
+  display: flex;
+  gap: 8px;
+  background: color-mix(in srgb, var(--line) 40%, var(--card));
+  padding: 6px;
+  border-radius: 99px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+}
+.tab-btn {
+  flex: 1;
+  min-width: 160px;
+  padding: 10px 18px;
+  border-radius: 99px;
+  border: none;
+  background: transparent;
+  color: var(--mute);
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.tab-btn.active {
+  background: var(--navy);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Cards */
+.card {
+  background: var(--card);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+/* Grid of Subtopics */
+.subtopics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 16px;
+}
+.subtopic-card {
+  background: var(--card);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+.subtopic-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--navy);
+}
+.subtopic-card.completed {
+  border-color: var(--green);
+  background: color-mix(in srgb, var(--green-light) 30%, var(--card));
+}
+.st-num {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--gold);
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+.st-title-ar {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+.st-title-en {
+  font-size: 0.88rem;
+  color: var(--mute);
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+.st-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
+}
+.badge-score {
+  font-size: 0.8rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 99px;
+  background: var(--line);
+  color: var(--ink);
+}
+.badge-score.pass {
+  background: var(--green-light);
+  color: var(--green);
+  border: 1px solid var(--green);
+}
+.btn-start {
+  background: var(--navy);
+  color: #fff;
+  border: none;
+  padding: 7px 16px;
+  border-radius: 99px;
+  font-weight: 800;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.btn-start:hover {
+  opacity: 0.9;
+}
+
+/* Quiz Screen */
+.quiz-header {
+  margin-bottom: 20px;
+}
+.quiz-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.btn-back {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--mute);
+  padding: 6px 14px;
+  border-radius: 99px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn-back:hover {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+.progress-rail {
+  width: 100%;
+  height: 8px;
+  background: var(--line);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.progress-thumb {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--navy));
+  transition: width 0.3s ease;
+  border-radius: 99px;
+}
+
+.question-text-box {
+  background: color-mix(in srgb, var(--navy-light) 50%, var(--card));
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 22px;
+  margin-bottom: 20px;
+}
+.q-title-ar {
+  font-size: 1.85rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 8px;
+  color: var(--ink);
+}
+.q-title-en {
+  font-size: 0.98rem;
+  color: var(--mute);
+}
+
+.options-stack {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.option-btn {
+  background: var(--card);
+  border: 2px solid var(--line);
+  border-radius: 14px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+.option-btn:hover:not(.locked) {
+  border-color: var(--navy);
+  transform: translateY(-1px);
+}
+.option-btn.selected {
+  border-color: var(--navy);
+  background: var(--navy-light);
+}
+.option-btn.correct-feedback {
+  border-color: var(--green) !important;
+  background: var(--green-light) !important;
+}
+.option-btn.wrong-feedback {
+  border-color: var(--red) !important;
+  background: var(--red-light) !important;
+}
+.opt-char {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--line);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+.option-btn.selected .opt-char {
+  background: var(--navy);
+  color: #fff;
+}
+.option-btn.correct-feedback .opt-char {
+  background: var(--green);
+  color: #fff;
+}
+.option-btn.wrong-feedback .opt-char {
+  background: var(--red);
+  color: #fff;
+}
+.opt-content {
+  flex-grow: 1;
+}
+.opt-content-ar {
+  font-size: 1.45rem;
+  font-weight: 700;
+  direction: rtl;
+  text-align: right;
+  display: block;
+}
+.opt-content-en {
+  font-size: 0.86rem;
+  color: var(--mute);
+  display: block;
+}
+
+/* Explanation Box */
+.explanation-callout {
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: var(--gold-light);
+  border-left: 5px solid var(--gold);
+  font-size: 0.92rem;
+  color: var(--ink);
+  margin-bottom: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Bottom Bar */
+.quiz-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.btn-primary {
+  background: var(--navy);
+  color: #fff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 99px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-primary:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+.btn-primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Certificate Result Card (Screenshot target) */
+.cert-card {
+  border: 4px solid var(--gold);
+  border-radius: var(--radius-lg);
+  padding: 36px 24px;
+  background: var(--card);
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+  max-width: 650px;
+  margin: 0 auto;
+}
+.cert-card::before {
+  content: "";
+  position: absolute;
+  top: 8px; left: 8px; right: 8px; bottom: 8px;
+  border: 1px dashed var(--gold);
+  border-radius: calc(var(--radius-lg) - 6px);
+  pointer-events: none;
+}
+.cert-header-icon {
+  font-size: 3rem;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.cert-title-ar {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 2px;
+}
+.cert-title-en {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--gold);
+  font-weight: 800;
+  margin-bottom: 18px;
+}
+.cert-student-box {
+  background: var(--navy-light);
+  border-radius: 14px;
+  padding: 12px 20px;
+  max-width: 440px;
+  margin: 0 auto 18px;
+  border: 1px solid color-mix(in srgb, var(--navy) 20%, transparent);
+}
+.cert-student-lbl {
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  color: var(--mute);
+  font-weight: 700;
+}
+.cert-student-val {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--navy);
+  line-height: 1.2;
+}
+
+.cert-subtopic-tag {
+  display: inline-block;
+  background: var(--gold-light);
+  border: 1.5px solid var(--gold);
+  border-radius: 99px;
+  padding: 6px 20px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+
+.cert-score-ring {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 6px solid var(--gold);
+  background: var(--card);
+  margin: 0 auto 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(184, 144, 63, 0.25);
+}
+.cert-score-num {
+  font-size: 2.5rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--navy);
+}
+.cert-score-denom {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--mute);
+}
+
+.cert-eval-pill {
+  display: inline-block;
+  padding: 6px 22px;
+  border-radius: 99px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  margin-bottom: 22px;
+}
+.eval-pass { background: var(--green-light); color: var(--green); border: 1.5px solid var(--green); }
+.eval-retry { background: var(--gold-light); color: var(--gold); border: 1.5px solid var(--gold); }
+
+/* Telegram Alert Box */
+.telegram-alert-banner {
+  background: #f0f9ff;
+  border: 2px dashed #0088cc;
+  border-radius: 16px;
+  padding: 20px 16px;
+  margin: 18px 0;
+  text-align: center;
+}
+@media (prefers-color-scheme: dark) {
+  .telegram-alert-banner { background: #132433; border-color: #29b6f6; }
+}
+.tg-title {
+  color: #0088cc;
+  font-size: 1.15rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+@media (prefers-color-scheme: dark) {
+  .tg-title { color: #29b6f6; }
+}
+.tg-instructions {
+  font-size: 0.95rem;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+.tg-badge {
+  display: inline-block;
+  background: #0088cc;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 900;
+  padding: 5px 16px;
+  border-radius: 8px;
+  letter-spacing: 0.5px;
+  margin-bottom: 14px;
+}
+.btn-telegram {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #0088cc;
+  color: #fff !important;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 800;
+  padding: 12px 24px;
+  border-radius: 99px;
+  box-shadow: 0 4px 14px rgba(0, 136, 204, 0.35);
+  transition: transform 0.2s, background 0.2s;
+}
+.btn-telegram:hover {
+  background: #0077b5;
+  transform: translateY(-1px);
+}
+
+.cert-meta-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--mute);
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+/* Modal for Student Name */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(15, 24, 36, 0.75);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 1000;
+}
+.modal-box {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  max-width: 440px;
+  width: 100%;
+  padding: 30px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--line);
+  text-align: center;
+}
+.modal-input {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 2px solid var(--line);
+  font-family: inherit;
+  font-size: 1.05rem;
+  background: var(--bg);
+  color: var(--ink);
+  margin: 18px 0;
+}
+.modal-input:focus {
+  outline: none;
+  border-color: var(--navy);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Footer */
+footer.app-footer {
+  text-align: center;
+  padding: 24px 16px;
+  color: var(--mute);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--line);
+  background: var(--card);
+}
+</style>
+</head>
+<body>
+
+<!-- Name Setup Modal -->
+<div id="name-modal" class="modal-overlay" style="display:none">
+  <div class="modal-box">
+    <div style="font-size:2.8rem;margin-bottom:8px">✍️📖</div>
+    <h2 style="color:var(--navy);margin-bottom:4px">Welcome to Natik Arabic</h2>
+    <p style="color:var(--mute);font-size:0.9rem">Please enter your full name so it appears on all your subtopic score cards and certificates.</p>
+    <input type="text" id="name-input" class="modal-input" placeholder="e.g. Maryam / محمد أحمد" autofocus>
+    <button id="save-name-btn" class="btn-primary" style="width:100%;padding:14px">Save & Continue 🚀</button>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="app-header">
+  <div class="header-inner">
+    <div class="brand-box">
+      <div class="brand-logo">ن</div>
+      <div class="brand-title">
+        <h1>Natik Arabic Language Center</h1>
+        <p>مَرْكَز نَاطِق لِلُّغَةِ الْعَرَبِيَّةِ · Automatic Grading & Assessment Portal</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <div class="student-pill" id="student-btn" title="Click to change your name">
+        <span>👤</span>
+        <span id="header-student-name">Student</span>
+        <span>✎</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Main Container -->
+<main class="main-content">
+
+  <!-- VIEW 1: Subtopics Dashboard -->
+  <section id="view-dashboard">
+    <div class="tabs-nav">
+      <button class="tab-btn active" data-track="beginner">🟢 Beginner Track (5 Units)</button>
+      <button class="tab-btn" data-track="week1">🔵 Intermediate: Week 1 (11 Topics)</button>
+      <button class="tab-btn" data-track="week2">🟣 Intermediate: Week 2 (5 Topics)</button>
+    </div>
+
+    <div class="card" style="margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+      <div>
+        <h2 id="track-heading" style="color:var(--navy);font-size:1.3rem;margin-bottom:2px">Beginner Assessment Units</h2>
+        <p id="track-desc" style="color:var(--mute);font-size:0.88rem">Complete each subtopic's 5 practice questions to earn and screenshot your certificate.</p>
+      </div>
+      <div style="font-size:0.9rem;font-weight:700" id="overall-progress-pill">
+        Passed: <span id="passed-count" style="color:var(--green)">0</span> / <span id="total-units-count">21</span>
+      </div>
+    </div>
+
+    <div id="subtopics-list" class="subtopics-grid">
+      <!-- Generated via JS -->
+    </div>
+  </section>
+
+  <!-- VIEW 2: Quiz Player -->
+  <section id="view-quiz" style="display:none">
+    <div class="card">
+      <div class="quiz-header">
+        <div class="quiz-top-bar">
+          <button class="btn-back" id="quiz-back-btn">← Back to Curriculum</button>
+          <span style="font-size:0.85rem;font-weight:800;color:var(--gold)" id="q-counter-text">Question 1 of 5</span>
+        </div>
+        <div class="progress-rail">
+          <div class="progress-thumb" id="quiz-progress-thumb" style="width:20%"></div>
+        </div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px">
+          <div>
+            <span style="font-size:0.76rem;text-transform:uppercase;color:var(--gold);font-weight:800" id="current-unit-num">TOPIC 1</span>
+            <h2 style="color:var(--navy);font-size:1.35rem" id="current-unit-title">Title Here</h2>
+          </div>
+          <span class="ar" style="font-size:1.6rem;font-weight:700;color:var(--navy)" id="current-unit-ar">العنوان</span>
+        </div>
+      </div>
+
+      <!-- Question Box -->
+      <div class="question-text-box">
+        <div class="q-title-ar ar" id="quiz-q-ar">السؤال هنا؟</div>
+        <div class="q-title-en" id="quiz-q-en">English question text goes here...</div>
+      </div>
+
+      <!-- Options -->
+      <div class="options-stack" id="quiz-options-stack">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Explanation Box (Appears after answer) -->
+      <div id="quiz-explanation" class="explanation-callout" style="display:none">
+        <strong>💡 Explanation:</strong> <span id="quiz-explanation-text"></span>
+      </div>
+
+      <!-- Actions -->
+      <div class="quiz-actions">
+        <div id="quiz-live-score" style="font-size:0.9rem;font-weight:700;color:var(--mute)">Score: 0 / 5</div>
+        <button class="btn-primary" id="quiz-next-btn" disabled>Next Question →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIEW 3: Score Card & Screenshot Certificate -->
+  <section id="view-result" style="display:none">
+    <div class="cert-card" id="screenshot-target">
+      <div class="cert-header-icon">🏆✨</div>
+      <p class="ar" style="font-size:1.4rem;color:var(--gold);margin:0">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيم</p>
+      <div class="cert-title-ar ar">شَهَادَةُ إِتْمَامِ الْوَحْدَةِ الدِّرَاسِيَّةِ</div>
+      <div class="cert-title-en">Natik Arabic Language Assessment · Unit Certificate</div>
+
+      <div class="cert-student-box">
+        <div class="cert-student-lbl">Student Full Name / اِسْمُ الطَّالِبِ</div>
+        <div class="cert-student-val" id="res-student-name">Maryam</div>
+      </div>
+
+      <div class="cert-subtopic-tag" id="res-unit-title">
+        Topic 3: Food Vocabulary · الطَّعَام
+      </div>
+
+      <div class="cert-score-ring">
+        <div class="cert-score-num" id="res-score-num">5</div>
+        <div class="cert-score-denom">/ 5</div>
+      </div>
+
+      <div>
+        <span class="cert-eval-pill eval-pass" id="res-eval-pill">مُمْتَاز · Distinction (100%)</span>
+      </div>
+
+      <!-- Telegram Call-to-Action for Screenshot -->
+      <div class="telegram-alert-banner">
+        <div class="tg-title">
+          <span>📸</span>
+          <span>Submit Grade to Instructor</span>
+        </div>
+        <p class="tg-instructions">
+          Take a screenshot of this score card right now and send it to your instructor via Telegram:
+        </p>
+        <div class="tg-badge">@Natikfluency</div>
+        <div>
+          <a href="https://t.me/Natikfluency" target="_blank" rel="noopener" class="btn-telegram">
+            ✈️ Open Telegram @Natikfluency
+          </a>
+        </div>
+      </div>
+
+      <div class="cert-meta-info">
+        <span id="res-date-stamp">Date: Oct 4, 2026</span>
+        <span id="res-cert-id">ID: NTK-938210</span>
+      </div>
+    </div>
+
+    <!-- Post-Quiz Action Bar -->
+    <div style="display:flex;justify-content:center;gap:12px;margin-top:24px;flex-wrap:wrap">
+      <button class="btn-back" id="res-retake-btn">🔄 Retake This Part</button>
+      <button class="btn-primary" id="res-dashboard-btn">📚 Back to All Topics</button>
+    </div>
+  </section>
+
+</main>
+
+<footer class="app-footer">
+  <p class="ar" style="font-size:1.3rem;color:var(--gold);margin-bottom:4px">بِالتَّوْفِيقِ وَالنَّجَاحِ لِجَمِيعِ الطُّلَّابِ</p>
+  <p>Natik Arabic Language Center · Official Student Assessment System · Telegram: <strong>@Natikfluency</strong></p>
+</footer>
+
+<script>
+/* =========================================================================
+   DATABASE: 21 SUBTOPICS (105 HIGH-YIELD QUESTIONS WITH TASHKEEL & EXPLANATIONS)
+   ========================================================================= */
+const curriculum = {
+  beginner: [
+    {
+      id: "b1",
+      num: "Unit B1",
+      title: "Greetings & Polite Formulas",
+      titleAr: "التَّحِيَّاتُ وَآدَابُ التَّعَارُف",
+      questions: [
+        {
+          ar: "إِذَا قَالَ لَكَ صَدِيقُكَ: «السَّلَامُ عَلَيْكُمْ»، مَا هُوَ الرَّدُّ الصَّحِيحُ؟",
+          en: "When someone greets you with 'As-salamu alaykum', what is the proper reply?",
+          options: [
+            { ar: "وَعَلَيْكُمُ السَّلَامُ", en: "Wa alaykumu s-salam (And upon you be peace)" },
+            { ar: "شُكْرًا جَزِيلًا", en: "Shukran jazilan (Thank you very much)" },
+            { ar: "مَعَ السَّلَامَةِ", en: "Ma'a s-salamah (Goodbye)" },
+            { ar: "أَنَا طَالِبٌ", en: "Ana talib (I am a student)" }
+          ],
+          ans: 0,
+          exp: "'وَعَلَيْكُمُ السَّلَامُ' is the reciprocal Islamic and polite Arabic greeting."
+        },
+        {
+          ar: "مَا هُوَ السُّؤَالُ الْمُنَاسِبُ لِمَعْرِفَةِ اسْمِ الشَّخْصِ؟",
+          en: "What is the proper question to ask a male person his name?",
+          options: [
+            { ar: "أَيْنَ تَسْكُنُ؟", en: "Where do you live?" },
+            { ar: "مَا اسْمُكَ؟", en: "What is your name?" },
+            { ar: "كَمْ عُمْرُكَ؟", en: "How old are you?" },
+            { ar: "مِنْ أَيْنَ أَنْتَ؟", en: "Where are you from?" }
+          ],
+          ans: 1,
+          exp: "'مَا اسْمُكَ؟' (Masc.) or 'مَا اسْمُكِ؟' (Fem.) asks for the person's name."
+        },
+        {
+          ar: "«كَيْفَ حَالُكَ؟» — مَا هُوَ الْجَوَابُ الشَّائِعُ؟",
+          en: "'Kayfa haluk?' (How are you?) — What is the standard answer?",
+          options: [
+            { ar: "عُمْرِي عِشْرُونَ سَنَةً", en: "I am twenty years old" },
+            { ar: "اِسْمِي أَحْمَدُ", en: "My name is Ahmad" },
+            { ar: "أَنَا بِخَيْرٍ، الْحَمْدُ لِلَّهِ", en: "I am fine, praise be to God" },
+            { ar: "أَنَا مِنْ إِثْيُوبْيَا", en: "I am from Ethiopia" }
+          ],
+          ans: 2,
+          exp: "'أَنَا بِخَيْرٍ، الْحَمْدُ لِلَّهِ' means 'I am well, praise be to God'."
+        },
+        {
+          ar: "إِذَا قَالَ لَكَ شَخْصٌ: «شُكْرًا»، فَمَاذَا تُجِيبُهُ بِأَدَبٍ؟",
+          en: "When someone says 'Shukran' (Thank you), what do you reply?",
+          options: [
+            { ar: "عَفْوًا", en: "Afwan (You are welcome)" },
+            { ar: "لَا بَأْسَ", en: "La ba's (Never mind)" },
+            { ar: "إِلَى اللِّقَاءِ", en: "Ila l-liqa' (See you later)" },
+            { ar: "نَعَمْ", en: "Na'am (Yes)" }
+          ],
+          ans: 0,
+          exp: "'عَفْوًا' is the standard polite response to 'شُكْرًا'."
+        },
+        {
+          ar: "عِنْدَ مُغَادَرَةِ زُمَلَائِكَ فِي خِتَامِ الدَّرْسِ، تَقُولُ:",
+          en: "When leaving your classmates at the end of class, you say:",
+          options: [
+            { ar: "أَهْلًا وَسَهْلًا", en: "Ahlan wa sahlan (Welcome)" },
+            { ar: "مَعَ السَّلَامَةِ / إِلَى اللِّقَاءِ", en: "Ma'a s-salamah / Ila l-liqa' (Goodbye / See you later)" },
+            { ar: "صَبَاحُ الْخَيْرِ", en: "Sabahu l-khayr (Good morning)" },
+            { ar: "تَشَرَّفْنَا", en: "Tasharrafna (Honored to meet you)" }
+          ],
+          ans: 1,
+          exp: "'مَعَ السَّلَامَةِ' and 'إِلَى اللِّقَاءِ' are the traditional farewell formulas."
+        }
+      ]
+    },
+    {
+      id: "b2",
+      num: "Unit B2",
+      title: "Demonstrative Pronouns",
+      titleAr: "أَسْمَاءُ الْإِشَارَة",
+      questions: [
+        {
+          ar: "«...... كِتَابٌ مُفِيدٌ». اِخْتَرِ اسْمَ الْإِشَارَةِ الْمُنَاسِبَ:",
+          en: "Choose the matching demonstrative for '... kitabun mufid' (masculine singular):",
+          options: [
+            { ar: "هَذِهِ", en: "Hadhihi (Feminine singular)" },
+            { ar: "هَذَا", en: "Hadha (Masculine singular)" },
+            { ar: "تِلْكَ", en: "Tilka (Feminine distant)" },
+            { ar: "هَؤُلَاءِ", en: "Ha'ula'i (Plural)" }
+          ],
+          ans: 1,
+          exp: "'كِتَابٌ' is masculine singular, therefore it takes 'هَذَا'."
+        },
+        {
+          ar: "«...... سَيَّارَةٌ سَرِيعَةٌ». اِخْتَرِ اسْمَ الْإِشَارَةِ الْمُنَاسِبَ:",
+          en: "Choose the matching demonstrative for '... sayyaratun sari'ah' (feminine singular):",
+          options: [
+            { ar: "هَذَا", en: "Hadha (Masculine)" },
+            { ar: "ذَلِكَ", en: "Dhalika (Masculine distant)" },
+            { ar: "هَذِهِ", en: "Hadhihi (Feminine)" },
+            { ar: "هُوَ", en: "Huwa (He)" }
+          ],
+          ans: 2,
+          exp: "'سَيَّارَةٌ' ends with Ta Marbutah (ـة), so it requires the feminine 'هَذِهِ'."
+        },
+        {
+          ar: "لِلْإِشَارَةِ إِلَى الْمُذَكَّرِ الْبَعِيدِ، نَسْتَخْدِمُ:",
+          en: "To point to a distant masculine object ('That ...'), we use:",
+          options: [
+            { ar: "هَذَا", en: "Hadha (This - near)" },
+            { ar: "ذَلِكَ", en: "Dhalika (That - far masc.)" },
+            { ar: "تِلْكَ", en: "Tilka (That - far fem.)" },
+            { ar: "هَذِهِ", en: "Hadhihi (This - near fem.)" }
+          ],
+          ans: 1,
+          exp: "'ذَلِكَ' means 'that' for distant masculine singular."
+        },
+        {
+          ar: "«...... حَقِيبَةٌ كَبِيرَةٌ».",
+          en: "Fill in the blank: '... haqibatun kabirah' (a large bag):",
+          options: [
+            { ar: "هَذِهِ", en: "Hadhihi" },
+            { ar: "هَذَا", en: "Hadha" },
+            { ar: "أَنْتَ", en: "Anta" },
+            { ar: "ذَلِكَ", en: "Dhalika" }
+          ],
+          ans: 0,
+          exp: "'حَقِيبَة' is feminine, taking 'هَذِهِ'."
+        },
+        {
+          ar: "أَيُّ الْجُمَلِ التَّالِيَةِ اسْتُخْدِمَ فِيهَا اسْمُ الْإِشَارَةِ بِشَكْلٍ خَاطِئٍ؟",
+          en: "In which sentence is the demonstrative pronoun used INCORRECTLY?",
+          options: [
+            { ar: "هَذَا قَلَمٌ", en: "Hadha qalam (Correct)" },
+            { ar: "هَذِهِ غُرْفَةٌ", en: "Hadhihi ghurfah (Correct)" },
+            { ar: "هَذَا مَدْرَسَةٌ", en: "Hadha madrasah (Incorrect - madrasah is fem.)" },
+            { ar: "ذَلِكَ بَيْتٌ", en: "Dhalika bayt (Correct)" }
+          ],
+          ans: 2,
+          exp: "'مَدْرَسَةٌ' is feminine and must take 'هَذِهِ' or 'تِلْكَ', not 'هَذَا'."
+        }
+      ]
+    },
+    {
+      id: "b3",
+      num: "Unit B3",
+      title: "Pronouns & Question Words",
+      titleAr: "الضَّمَائِرُ وَأَدَوَاتُ الِاسْتِفْهَام",
+      questions: [
+        {
+          ar: "«...... طَالِبَةٌ مُجْتَهِدَةٌ». (ضَمِيرٌ لِلْمُؤَنَّثِ الْغَائِبِ)",
+          en: "Choose the third-person feminine singular pronoun ('She'):",
+          options: [
+            { ar: "هُوَ", en: "Huwa (He)" },
+            { ar: "هِيَ", en: "Hiya (She)" },
+            { ar: "أَنْتَ", en: "Anta (You - masc.)" },
+            { ar: "أَنَا", en: "Ana (I)" }
+          ],
+          ans: 1,
+          exp: "'هِيَ' corresponds to 'She' in Arabic."
+        },
+        {
+          ar: "أَدَاةُ الِاسْتِفْهَامِ الْمُسْتَخْدَمَةُ لِلسُّؤَالِ عَنِ الْمَكَانِ هِيَ:",
+          en: "Which question word is used to ask about a location or place?",
+          options: [
+            { ar: "مَتَى؟", en: "When?" },
+            { ar: "أَيْنَ؟", en: "Where?" },
+            { ar: "مَنْ؟", en: "Who?" },
+            { ar: "كَيْفَ؟", en: "How?" }
+          ],
+          ans: 1,
+          exp: "'أَيْنَ؟' translates to 'Where?' (e.g. أَيْنَ تَسْكُنُ؟)."
+        },
+        {
+          ar: "«...... هَذَا؟ — هَذَا صَدِيقِي خَالِدٌ». (السُّؤَالُ عَنِ الْعَاقِلِ)",
+          en: "Which question word asks 'Who is this?' about a human being?",
+          options: [
+            { ar: "مَا", en: "Ma (What - for objects)" },
+            { ar: "مَنْ", en: "Man (Who - for persons)" },
+            { ar: "كَمْ", en: "Kam (How many)" },
+            { ar: "أَيْنَ", en: "Ayna (Where)" }
+          ],
+          ans: 1,
+          exp: "'مَنْ' asks 'Who?' for rational beings, whereas 'مَا' asks 'What?' for objects."
+        },
+        {
+          ar: "كَيْفَ تَقُولُ بِالْعَرَبِيَّةِ: «I am from Ethiopia»؟",
+          en: "How do you translate: 'I am from Ethiopia'?",
+          options: [
+            { ar: "أَنْتَ فِي إِثْيُوبْيَا", en: "You are in Ethiopia" },
+            { ar: "أَنَا مِنْ إِثْيُوبْيَا", en: "I am from Ethiopia" },
+            { ar: "هُوَ إِلَى إِثْيُوبْيَا", en: "He is to Ethiopia" },
+            { ar: "نَحْنُ عَنْ إِثْيُوبْيَا", en: "We are about Ethiopia" }
+          ],
+          ans: 1,
+          exp: "'أَنَا' = I, 'مِنْ' = from."
+        },
+        {
+          ar: "لِلسُّؤَالِ عَنِ الْعَدَدِ، نَسْتَخْدِمُ:",
+          en: "To ask about quantity or numbers ('How many?'), we use:",
+          options: [
+            { ar: "كَيْفَ؟", en: "How?" },
+            { ar: "كَمْ؟", en: "How many / how much?" },
+            { ar: "مَاذَا؟", en: "What?" },
+            { ar: "أَيْنَ؟", en: "Where?" }
+          ],
+          ans: 1,
+          exp: "'كَمْ؟' means 'How many?' (e.g. كَمْ عُمْرُكَ؟)."
+        }
+      ]
+    },
+    {
+      id: "b4",
+      num: "Unit B4",
+      title: "Basic Adjectives & Colors",
+      titleAr: "الصِّفَاتُ الْأَسَاسِيَّةُ وَالْأَلْوَان",
+      questions: [
+        {
+          ar: "مَا هُوَ مُؤَنَّثُ صِفَةِ «كَبِير»؟",
+          en: "What is the feminine singular form of 'كَبِير' (big)?",
+          options: [
+            { ar: "كِبَار", en: "Kibar" },
+            { ar: "كَبِيرَة", en: "Kabirah" },
+            { ar: "أَكْبَر", en: "Akbar" },
+            { ar: "كَبِيرَات", en: "Kabirat" }
+          ],
+          ans: 1,
+          exp: "Adjectives form their regular feminine singular with Ta Marbutah: كَبِير ← كَبِيرَة."
+        },
+        {
+          ar: "عَكْسُ (ضِدُّ) كَلِمَةِ «جَدِيد» هُوَ:",
+          en: "What is the opposite of 'جَدِيد' (new)?",
+          options: [
+            { ar: "صَغِير", en: "Saghir (Small)" },
+            { ar: "قَدِيم", en: "Qadim (Old)" },
+            { ar: "نَظِيف", en: "Nazif (Clean)" },
+            { ar: "سَرِيع", en: "Sari' (Fast)" }
+          ],
+          ans: 1,
+          exp: "جَدِيد (new) is the direct opposite of قَدِيم (old)."
+        },
+        {
+          ar: "«قَمِيصٌ ......». اِخْتَرِ اللَّوْنَ الْمُذَكَّرَ الْمُنَاسِبَ:",
+          en: "Choose the matching color for 'Qamisun ...' (a shirt - masculine):",
+          options: [
+            { ar: "أَبْيَضُ", en: "Abyad (White - masc.)" },
+            { ar: "بَيْضَاءُ", en: "Bayda' (White - fem.)" },
+            { ar: "حَمْرَاءُ", en: "Hamra' (Red - fem.)" },
+            { ar: "سَوْدَاءُ", en: "Sawda' (Black - fem.)" }
+          ],
+          ans: 0,
+          exp: "'قَمِيص' is masculine, taking the masculine color form 'أَبْيَض'."
+        },
+        {
+          ar: "«سَيَّارَةٌ ......». اِخْتَرِ اللَّوْنَ الْمُؤَنَّثَ الْمُنَاسِبَ:",
+          en: "Choose the matching color for 'Sayyaratun ...' (a car - feminine):",
+          options: [
+            { ar: "أَحْمَرُ", en: "Ahmar (Red - masc.)" },
+            { ar: "حَمْرَاءُ", en: "Hamra' (Red - fem.)" },
+            { ar: "أَزْرَقُ", en: "Azraq (Blue - masc.)" },
+            { ar: "أَسْوَدُ", en: "Aswad (Black - masc.)" }
+          ],
+          ans: 1,
+          exp: "'سَيَّارَة' is feminine, taking the feminine color pattern 'حَمْرَاء'."
+        },
+        {
+          ar: "أَيُّ هَذِهِ التَّرَاكِيبِ صَحِيحٌ فِي تَطَابُقِ الصِّفَةِ وَالْمَوْصُوفِ؟",
+          en: "Which of the following phrases is grammatically accurate in gender agreement?",
+          options: [
+            { ar: "بَيْتٌ كَبِيرَةٌ", en: "Baytun kabirah (Masc. + Fem. - incorrect)" },
+            { ar: "غُرْفَةٌ كَبِيرٌ", en: "Ghurfatun kabir (Fem. + Masc. - incorrect)" },
+            { ar: "بَيْتٌ كَبِيرٌ", en: "Baytun kabir (Masc. + Masc. - correct)" },
+            { ar: "سَيَّارَةٌ سَرِيعٌ", en: "Sayyaratun sari' (Fem. + Masc. - incorrect)" }
+          ],
+          ans: 2,
+          exp: "'بَيْتٌ كَبِيرٌ' accurately agrees in masculine gender and indefiniteness."
+        }
+      ]
+    },
+    {
+      id: "b5",
+      num: "Unit B5",
+      title: "Everyday Objects, Family & Numbers",
+      titleAr: "الْأَشْيَاءُ وَالْعَائِلَةُ وَالْأَرْقَام",
+      questions: [
+        {
+          ar: "أَيُّ شَيْءٍ تَسْتَخْدِمُهُ لِفَتْحِ الْبَابِ وَإِغْلَاقِهِ؟",
+          en: "What everyday object do you use to unlock or open a door?",
+          options: [
+            { ar: "مِفْتَاح", en: "Miftah (Key)" },
+            { ar: "قَلَم", en: "Qalam (Pen)" },
+            { ar: "سَاعَة", en: "Sa'ah (Watch/Clock)" },
+            { ar: "كُرْسِيّ", en: "Kursiyy (Chair)" }
+          ],
+          ans: 0,
+          exp: "'مِفْتَاح' means key (derived from the root ف-ت-ح to open)."
+        },
+        {
+          ar: "«أَخُو الْأَبِ» يُسَمَّى فِي اللُّغَةِ الْعَرَبِيَّةِ:",
+          en: "What is your father's brother called in Arabic kinship terms?",
+          options: [
+            { ar: "خَال", en: "Khal (Maternal uncle)" },
+            { ar: "عَمّ", en: "Amm (Paternal uncle)" },
+            { ar: "جَدّ", en: "Jadd (Grandfather)" },
+            { ar: "ابْن", en: "Ibn (Son)" }
+          ],
+          ans: 1,
+          exp: "عَمّ = paternal uncle (father's brother); خَال = maternal uncle (mother's brother)."
+        },
+        {
+          ar: "الرَّقْمُ (٣) بِالْحُرُوفِ الْعَرَبِيَّةِ هُوَ:",
+          en: "What is the number '3' written in Arabic words?",
+          options: [
+            { ar: "وَاحِد", en: "Wahid (1)" },
+            { ar: "اِثْنَان", en: "Ithnan (2)" },
+            { ar: "ثَلَاثَة", en: "Thalatha (3)" },
+            { ar: "أَرْبَعَة", en: "Arba'ah (4)" }
+          ],
+          ans: 2,
+          exp: "٣ is ثَلَاثَة (three)."
+        },
+        {
+          ar: "أَيُّ كَلِمَةٍ مِمَّا يَلِي تَعْنِي «Bread»؟",
+          en: "Which of the following Arabic words means 'Bread'?",
+          options: [
+            { ar: "أَرُزّ", en: "Aruzz (Rice)" },
+            { ar: "خُبْز", en: "Khubz (Bread)" },
+            { ar: "لَحْم", en: "Lahm (Meat)" },
+            { ar: "سَمَك", en: "Samak (Fish)" }
+          ],
+          ans: 1,
+          exp: "'خُبْز' means bread."
+        },
+        {
+          ar: "كَلِمَةُ «جَدَّة» تَعْنِي:",
+          en: "The Arabic kinship word 'جَدَّة' translates to:",
+          options: [
+            { ar: "Mother", en: "Mother (أُمّ)" },
+            { ar: "Grandmother", en: "Grandmother (جَدَّة)" },
+            { ar: "Sister", en: "Sister (أُخْت)" },
+            { ar: "Daughter", en: "Daughter (بِنْت)" }
+          ],
+          ans: 1,
+          exp: "جَدّ = grandfather, and جَدَّة = grandmother."
+        }
+      ]
+    }
+  ],
+
+  week1: [
+    {
+      id: "w1_t1",
+      num: "Week 1 · Topic 1",
+      title: "Self-Introduction",
+      titleAr: "التَّعْرِيفُ بِالنَّفْس",
+      questions: [
+        {
+          ar: "مَا مَعْنَى عِبَارَةِ: «أَسْكُنُ فِي مَدِينَةٍ كَبِيرَةٍ»؟",
+          en: "What does the sentence 'أَسْكُنُ فِي مَدِينَةٍ كَبِيرَةٍ' mean?",
+          options: [
+            { ar: "I live in a big city", en: "I live in a big city" },
+            { ar: "I study in a large school", en: "I study in a large school" },
+            { ar: "I work in an office", en: "I work in an office" },
+            { ar: "I have a big family", en: "I have a big family" }
+          ],
+          ans: 0,
+          exp: "أَسْكُنُ = I live/reside; مَدِينَة كَبِيرَة = a big city."
+        },
+        {
+          ar: "أَيُّ جُمْلَةٍ تُعَبِّرُ عَنِ السِّنِّ وَالْعُمْرِ تَعْبِيرًا عَرَبِيًّا صَحِيحًا؟",
+          en: "Which sentence correctly expresses one's age in Arabic?",
+          options: [
+            { ar: "اِسْمِي عِشْرُونَ سَنَةً", en: "My name is 20 years" },
+            { ar: "عُمْرِي خَمْسٌ وَعِشْرُونَ سَنَةً", en: "My age is 25 years" },
+            { ar: "أَنَا مِنْ عِشْرِينَ سَنَةً", en: "I am from 20 years" },
+            { ar: "أَسْكُنُ عِشْرِينَ سَنَةً", en: "I live 20 years" }
+          ],
+          ans: 1,
+          exp: "Age is properly framed as 'عُمْرِي... سَنَةً'."
+        },
+        {
+          ar: "كَلِمَةُ «هِوَايَة» تَعْنِي فِي السِّيَاقِ:",
+          en: "The word 'هِوَايَة' in personal introductions means:",
+          options: [
+            { ar: "Hobby / Pastime", en: "Hobby" },
+            { ar: "Profession / Job", en: "Job" },
+            { ar: "Nationality", en: "Nationality" },
+            { ar: "Language", en: "Language" }
+          ],
+          ans: 0,
+          exp: "هِوَايَة refers to personal interests and hobbies (e.g. هِوَايَتِي الْقِرَاءَةُ)."
+        },
+        {
+          ar: "«أَنَا طَالِبٌ فِي ......» — اِخْتَرِ التَّكْمِلَةَ الْمَنْطِقِيَّةَ:",
+          en: "Fill in the blank logically: 'Ana talibun fi ...' (I am a student at ...):",
+          options: [
+            { ar: "الْجَامِعَةِ", en: "The university" },
+            { ar: "السَّيَّارَةِ", en: "The car" },
+            { ar: "الْقِرَاءَةِ", en: "The reading" },
+            { ar: "الرِّيَاضَةِ", en: "The sport" }
+          ],
+          ans: 0,
+          exp: "طَالِبٌ فِي الْجَامِعَةِ means a university student."
+        },
+        {
+          ar: "عِبَارَةُ «أَنَا سَعِيدٌ بِلِقَائِكُمْ» تُقَالُ عِنْدَ:",
+          en: "The polite expression 'أَنَا سَعِيدٌ بِلِقَائِكُمْ' is used when:",
+          options: [
+            { ar: "Meeting people and greeting them warmly", en: "Meeting people" },
+            { ar: "Expressing that you are hungry", en: "Eating" },
+            { ar: "Saying you are tired and going to sleep", en: "Sleeping" },
+            { ar: "Asking about someone's age", en: "Asking age" }
+          ],
+          ans: 0,
+          exp: "It means 'I am happy/delighted to meet you'."
+        }
+      ]
+    },
+    {
+      id: "w1_t2",
+      num: "Week 1 · Topic 2",
+      title: "Introduction Dialogue",
+      titleAr: "حِوَار التَّعَارُف",
+      questions: [
+        {
+          ar: "عِنْدَمَا يَقُولُ لَكَ الشَّخْصُ: «تَشَرَّفْنَا»، فَإِنَّهُ يَقْصِدُ:",
+          en: "What does the expression 'تَشَرَّفْنَا' mean in a conversation?",
+          options: [
+            { ar: "Pleased to meet you / Honored", en: "Pleased to meet you" },
+            { ar: "Excuse me", en: "Excuse me" },
+            { ar: "Where are you going?", en: "Where to?" },
+            { ar: "Have a nice meal", en: "Nice meal" }
+          ],
+          ans: 0,
+          exp: "تَشَرَّفْنَا expresses honor and pleasure in meeting someone."
+        },
+        {
+          ar: "مَا هُوَ السُّؤَالُ عَنِ الْمِهْنَةِ وَالْعَمَلِ؟",
+          en: "Which question asks someone about their occupation?",
+          options: [
+            { ar: "أَيْنَ تَسْكُنُ؟", en: "Where do you live?" },
+            { ar: "مَاذَا تَعْمَلُ؟", en: "What do you do / work?" },
+            { ar: "كَمْ عُمْرُكَ؟", en: "How old are you?" },
+            { ar: "مَا اسْمُكَ؟", en: "What is your name?" }
+          ],
+          ans: 1,
+          exp: "'مَاذَا تَعْمَلُ؟' means 'What work do you do?'."
+        },
+        {
+          ar: "الرَّدُّ الْمُنَاسِبُ عَلَى «سَعِدْتُ بِمَعْرِفَتِكَ» هُوَ:",
+          en: "What is the appropriate polite reply to 'سَعِدْتُ بِمَعْرِفَتِكَ'?",
+          options: [
+            { ar: "وَأَنَا أَيْضًا", en: "Me too / Likewise" },
+            { ar: "لَا أَعْرِفُ", en: "I don't know" },
+            { ar: "عُمْرِي عِشْرُونَ", en: "I am twenty" },
+            { ar: "أَنَا طَالِبٌ", en: "I am a student" }
+          ],
+          ans: 0,
+          exp: "'وَأَنَا أَيْضًا' (Me as well) is the natural reply."
+        },
+        {
+          ar: "«أَعْمَلُ فِي مَكْتَبٍ ......». اِخْتَرِ الصِّفَةَ الْمُنَاسِبَةَ إِعْرَابًا:",
+          en: "Choose the grammatically agreeing adjective for 'maktabin ...':",
+          options: [
+            { ar: "صَغِيرٍ", en: "Saghirin (Masc. genitive)" },
+            { ar: "صَغِيرَةٍ", en: "Saghiratin (Fem.)" },
+            { ar: "أَصْغَرُ", en: "Asgharu" },
+            { ar: "صَغِيرَات", en: "Saghirat" }
+          ],
+          ans: 0,
+          exp: "مَكْتَب is masculine and in the genitive case after فِي, matching with صَغِيرٍ."
+        },
+        {
+          ar: "عِبَارَةُ «إِلَى اللِّقَاءِ» تَعْنِي:",
+          en: "The parting phrase 'إِلَى اللِّقَاءِ' translates to:",
+          options: [
+            { ar: "See you later / Until we meet again", en: "See you later" },
+            { ar: "Good morning", en: "Good morning" },
+            { ar: "Welcome to my home", en: "Welcome" },
+            { ar: "Thank you for the gift", en: "Thank you" }
+          ],
+          ans: 0,
+          exp: "إِلَى اللِّقَاءِ literally means 'until the meeting / see you later'."
+        }
+      ]
+    },
+    {
+      id: "w1_t3",
+      num: "Week 1 · Topic 3",
+      title: "Food Vocabulary",
+      titleAr: "مُفْرَدَاتُ الطَّعَام",
+      questions: [
+        {
+          ar: "أَيُّ الْكَلِمَاتِ التَّالِيَةِ تَعْنِي «Chicken»؟",
+          en: "Which of the following words means 'Chicken'?",
+          options: [
+            { ar: "سَمَك", en: "Fish" },
+            { ar: "دَجَاج", en: "Chicken" },
+            { ar: "لَحْم", en: "Meat" },
+            { ar: "أَرُزّ", en: "Rice" }
+          ],
+          ans: 1,
+          exp: "دَجَاج means chicken."
+        },
+        {
+          ar: "«طَعَامٌ صِحِّيٌّ» يَعْنِي:",
+          en: "'Ta'amun sihhiyyun' means:",
+          options: [
+            { ar: "Healthy food", en: "Healthy food" },
+            { ar: "Fast food", en: "Fast food" },
+            { ar: "Cold drink", en: "Cold drink" },
+            { ar: "Expensive meal", en: "Expensive meal" }
+          ],
+          ans: 0,
+          exp: "صِحِّي means healthy."
+        },
+        {
+          ar: "عَكْسُ (ضِدُّ) «طَعَامٌ سَاخِنٌ» هُوَ:",
+          en: "What is the opposite of 'طَعَامٌ سَاخِنٌ' (hot food)?",
+          options: [
+            { ar: "طَعَامٌ لَذِيذٌ", en: "Delicious food" },
+            { ar: "طَعَامٌ بَارِدٌ", en: "Cold food" },
+            { ar: "طَعَامٌ سَرِيعٌ", en: "Fast food" },
+            { ar: "طَعَامٌ قَدِيمٌ", en: "Old food" }
+          ],
+          ans: 1,
+          exp: "سَاخِن (hot) ↔ بَارِد (cold)."
+        },
+        {
+          ar: "«التُّفَّاحُ وَالْمَوْزُ وَالْعِنَبُ» تُصَنَّفُ ضِمْنَ:",
+          en: "Apples, bananas, and grapes are classified under:",
+          options: [
+            { ar: "الْخُضَارِ", en: "Vegetables" },
+            { ar: "الْفَاكِهَةِ", en: "Fruit" },
+            { ar: "اللُّحُومِ", en: "Meat" },
+            { ar: "الْمَشْرُوبَاتِ", en: "Drinks" }
+          ],
+          ans: 1,
+          exp: "They are classified as فَاكِهَة (fruit)."
+        },
+        {
+          ar: "«طَعَامٌ لَذِيذٌ» تَعْنِي بِالْإِنْجْلِيزِيَّةِ:",
+          en: "'Ta'amun ladhidhun' translates to:",
+          options: [
+            { ar: "Delicious food", en: "Delicious food" },
+            { ar: "Spicy food", en: "Spicy food" },
+            { ar: "Bad food", en: "Bad food" },
+            { ar: "Cold soup", en: "Cold soup" }
+          ],
+          ans: 0,
+          exp: "لَذِيذ means delicious."
+        }
+      ]
+    },
+    {
+      id: "w1_t4",
+      num: "Week 1 · Topic 4",
+      title: "Colors: Masculine & Feminine",
+      titleAr: "الْأَلْوَان: الْمُذَكَّرُ وَالْمُؤَنَّث",
+      questions: [
+        {
+          ar: "مَا هُوَ مُؤَنَّثُ اللَّوْنِ «أَزْرَق»؟",
+          en: "What is the feminine form of the color 'أَزْرَق' (blue)?",
+          options: [
+            { ar: "زَرْقَاء", en: "Zarqa'" },
+            { ar: "أَزْرَقَة", en: "Azraqah" },
+            { ar: "زُرْقَة", en: "Zurqah" },
+            { ar: "زُرُق", en: "Zuruq" }
+          ],
+          ans: 0,
+          exp: "Basic color adjectives follow the pattern أَفْعَل (masc.) and فَعْلَاء (fem.): أَزْرَق ← زَرْقَاء."
+        },
+        {
+          ar: "«سَيَّارَةٌ ......». اِخْتَرِ الصِّفَةَ الْمُنَاسِبَةَ:",
+          en: "Choose the matching color for 'sayyaratun ...' (a car - feminine):",
+          options: [
+            { ar: "أَحْمَرُ", en: "Ahmar" },
+            { ar: "حَمْرَاءُ", en: "Hamra'" },
+            { ar: "أَخْضَرُ", en: "Akhdar" },
+            { ar: "أَصْفَرُ", en: "Asfar" }
+          ],
+          ans: 1,
+          exp: "سَيَّارَة is feminine, requiring the feminine color form حَمْرَاء."
+        },
+        {
+          ar: "اللَّوْنُ «بُنِّيّ» يَعْنِي بِالْإِنْجْلِيزِيَّةِ:",
+          en: "The color 'بُنِّيّ' means:",
+          options: [
+            { ar: "Gray", en: "Gray" },
+            { ar: "Brown", en: "Brown" },
+            { ar: "Black", en: "Black" },
+            { ar: "White", en: "White" }
+          ],
+          ans: 1,
+          exp: "بُنِّيّ means brown (named after coffee beans / بُنّ)."
+        },
+        {
+          ar: "«قَلَمٌ ......». اِخْتَرِ اللَّوْنَ الْمُذَكَّرَ الصَّحِيحَ:",
+          en: "Choose the masculine color form for 'qalamun ...' (a pen):",
+          options: [
+            { ar: "سَوْدَاءُ", en: "Sawda'" },
+            { ar: "أَسْوَدُ", en: "Aswad" },
+            { ar: "بَيْضَاءُ", en: "Bayda'" },
+            { ar: "خَضْرَاءُ", en: "Khadra'" }
+          ],
+          ans: 1,
+          exp: "قَلَم is masculine singular, matching with أَسْوَد."
+        },
+        {
+          ar: "مَا هُوَ مُؤَنَّثُ «رَمَادِيّ» (Gray)؟",
+          en: "What is the feminine form of 'رَمَادِيّ' (gray)?",
+          options: [
+            { ar: "رَمَادِيَّة", en: "Ramadiyyah" },
+            { ar: "رَمْدَاء", en: "Ramda'" },
+            { ar: "رَمَاد", en: "Ramad" },
+            { ar: "رُمْد", en: "Rumd" }
+          ],
+          ans: 0,
+          exp: "Relational colors ending in nisba yaa (ـيّ) take Ta Marbutah: رَمَادِيّ ← رَمَادِيَّة."
+        }
+      ]
+    },
+    {
+      id: "w1_t5",
+      num: "Week 1 · Topic 5",
+      title: "Things & Objects",
+      titleAr: "الْأَشْيَاءُ وَالْأَدَوَات",
+      questions: [
+        {
+          ar: "كَلِمَةُ «دَفْتَر» تَعْنِي:",
+          en: "What does the word 'دَفْتَر' mean?",
+          options: [
+            { ar: "Book", en: "Book" },
+            { ar: "Notebook", en: "Notebook" },
+            { ar: "Desk", en: "Desk" },
+            { ar: "Pen", en: "Pen" }
+          ],
+          ans: 1,
+          exp: "دَفْتَر means notebook."
+        },
+        {
+          ar: "«أَضَعُ الْكُتُبَ وَالْأَقْلَامَ فِي ......».",
+          en: "I put books and pens inside the:",
+          options: [
+            { ar: "الْحَقِيبَةِ", en: "Bag" },
+            { ar: "الْهَاتِفِ", en: "Phone" },
+            { ar: "السَّاعَةِ", en: "Clock" },
+            { ar: "الْمِفْتَاحِ", en: "Key" }
+          ],
+          ans: 0,
+          exp: "حَقِيبَة means bag/backpack."
+        },
+        {
+          ar: "الشَّيْءُ الَّذِي نَجْلِسُ عَلَيْهِ فِي الْغُرْفَةِ يُسَمَّى:",
+          en: "The piece of furniture we sit on is called:",
+          options: [
+            { ar: "مِفْتَاح", en: "Key" },
+            { ar: "قَلَم", en: "Pen" },
+            { ar: "كُرْسِيّ", en: "Chair" },
+            { ar: "هَاتِف", en: "Phone" }
+          ],
+          ans: 2,
+          exp: "كُرْسِيّ means chair."
+        },
+        {
+          ar: "«هَاتِفٌ جَدِيدٌ» تَعْنِي:",
+          en: "'Hatifun jadidun' means:",
+          options: [
+            { ar: "An old key", en: "Old key" },
+            { ar: "A new phone", en: "New phone" },
+            { ar: "A fast car", en: "Fast car" },
+            { ar: "A clean table", en: "Clean table" }
+          ],
+          ans: 1,
+          exp: "هَاتِف = telephone/phone, جَدِيد = new."
+        },
+        {
+          ar: "أَيُّ هَذِهِ الْكَلِمَاتِ كَلِمَةٌ مُؤَنَّثَةٌ؟",
+          en: "Which of the following objects is feminine in Arabic?",
+          options: [
+            { ar: "كِتَاب", en: "Kitab" },
+            { ar: "قَلَم", en: "Qalam" },
+            { ar: "طَاوِلَة", en: "Tawilah (Table)" },
+            { ar: "كُرْسِيّ", en: "Kursiyy" }
+          ],
+          ans: 2,
+          exp: "طَاوِلَة has Ta Marbutah (ـة), making it feminine."
+        }
+      ]
+    },
+    {
+      id: "w1_t6",
+      num: "Week 1 · Topic 6",
+      title: "Family Kinship",
+      titleAr: "أَفْرَادُ الْعَائِلَة",
+      questions: [
+        {
+          ar: "«أَخُو الْأُمِّ» يُسَمَّى فِي اللُّغَةِ الْعَرَبِيَّةِ:",
+          en: "Your mother's brother is called:",
+          options: [
+            { ar: "الْعَمُّ", en: "Paternal uncle" },
+            { ar: "الْخَالُ", en: "Maternal uncle" },
+            { ar: "الْجَدُّ", en: "Grandfather" },
+            { ar: "الِابْنُ", en: "Son" }
+          ],
+          ans: 1,
+          exp: "خَال refers specifically to the mother's brother."
+        },
+        {
+          ar: "مَا مَعْنَى «لِي أَخٌ أَكْبَرُ مِنِّي»؟",
+          en: "What does 'لِي أَخٌ أَكْبَرُ مِنِّي' mean?",
+          options: [
+            { ar: "I have a younger sister", en: "Younger sister" },
+            { ar: "I have an older brother", en: "Older brother" },
+            { ar: "My father is very kind", en: "Kind father" },
+            { ar: "I have two siblings", en: "Two siblings" }
+          ],
+          ans: 1,
+          exp: "أَخٌ أَكْبَر means an older brother."
+        },
+        {
+          ar: "كَلِمَةُ «جَدَّة» تَعْنِي:",
+          en: "'Jaddah' means:",
+          options: [
+            { ar: "Mother", en: "Mother" },
+            { ar: "Grandmother", en: "Grandmother" },
+            { ar: "Aunt", en: "Aunt" },
+            { ar: "Sister", en: "Sister" }
+          ],
+          ans: 1,
+          exp: "جَدَّة means grandmother."
+        },
+        {
+          ar: "عِنْدَمَا تَكُونُ الْعَائِلَةُ مُتَّحِدَةً وَمُتَحَابَّةً، نَصِفُهَا بِأَنَّهَا:",
+          en: "When a family is close and unified, we describe it as:",
+          options: [
+            { ar: "مُتَرَابِطَةٌ", en: "Close-knit / united" },
+            { ar: "بَطِيئَةٌ", en: "Slow" },
+            { ar: "قَدِيمَةٌ", en: "Old" },
+            { ar: "صَغِيرَةٌ", en: "Small" }
+          ],
+          ans: 0,
+          exp: "مُتَرَابِطَة means cohesive, close-knit, and united."
+        },
+        {
+          ar: "مُؤَنَّثُ كَلِمَة «ابْن» هُوَ:",
+          en: "What is the female counterpart of 'ابْن' (son)?",
+          options: [
+            { ar: "أُخْت", en: "Sister" },
+            { ar: "أُمّ", en: "Mother" },
+            { ar: "بِنْت", en: "Daughter" },
+            { ar: "عَمَّة", en: "Aunt" }
+          ],
+          ans: 2,
+          exp: "ابْن = son; بِنْت = daughter."
+        }
+      ]
+    },
+    {
+      id: "w1_t7",
+      num: "Week 1 · Topic 7",
+      title: "Clothing Vocabulary",
+      titleAr: "مُفْرَدَاتُ الْمَلَابِس",
+      questions: [
+        {
+          ar: "كَلِمَةُ «سِرْوَال» تَعْنِي:",
+          en: "What does the word 'سِرْوَال' mean?",
+          options: [
+            { ar: "Shirt", en: "Shirt" },
+            { ar: "Trousers / Pants", en: "Trousers" },
+            { ar: "Dress", en: "Dress" },
+            { ar: "Coat", en: "Coat" }
+          ],
+          ans: 1,
+          exp: "سِرْوَال means trousers / pants."
+        },
+        {
+          ar: "«حِذَاءٌ جَدِيدٌ» يَعْنِي:",
+          en: "'Hitha'un jadidun' means:",
+          options: [
+            { ar: "New shoes", en: "New shoes" },
+            { ar: "A clean jacket", en: "Clean jacket" },
+            { ar: "A blue shirt", en: "Blue shirt" },
+            { ar: "A long robe", en: "Long robe" }
+          ],
+          ans: 0,
+          exp: "حِذَاء means shoes / footwear, and جَدِيد means new."
+        },
+        {
+          ar: "مَا تَرْتَدِيهِ الْمَرْأَةُ مِنَ الثِّيَابِ الْجَمِيلَةِ فِي الْمُنَاسَبَاتِ يُسَمَّى:",
+          en: "A dress worn by a woman is called:",
+          options: [
+            { ar: "قَمِيص", en: "Shirt" },
+            { ar: "فُسْتَان", en: "Dress" },
+            { ar: "جَوْرَب", en: "Sock" },
+            { ar: "سِرْوَال", en: "Pants" }
+          ],
+          ans: 1,
+          exp: "فُسْتَان means dress."
+        },
+        {
+          ar: "مَا نَرْتَدِيهِ فِي الشِّتَاءِ لِلْوِقَايَةِ مِنَ الْبَرْدِ:",
+          en: "What outerwear is worn in winter to protect against cold?",
+          options: [
+            { ar: "مِعْطَفٌ أَوْ سُتْرَةٌ", en: "Coat or jacket" },
+            { ar: "قَمِيصٌ خَفِيفٌ", en: "Light shirt" },
+            { ar: "قُبَّعَةٌ فَقَطْ", en: "Hat only" },
+            { ar: "سِرْوَالٌ قَصِيرٌ", en: "Shorts" }
+          ],
+          ans: 0,
+          exp: "مِعْطَف (coat) and سُتْرَة (jacket) provide cold protection."
+        },
+        {
+          ar: "كَلِمَةُ «جَوْرَب» تُطْلَقُ عَلَى:",
+          en: "The word 'جَوْرَب' refers to:",
+          options: [
+            { ar: "Sock", en: "Sock" },
+            { ar: "Hat", en: "Hat" },
+            { ar: "Belt", en: "Belt" },
+            { ar: "Glove", en: "Glove" }
+          ],
+          ans: 0,
+          exp: "جَوْرَب means sock."
+        }
+      ]
+    },
+    {
+      id: "w1_t8",
+      num: "Week 1 · Topic 8",
+      title: "Essential Adjectives",
+      titleAr: "الصِّفَاتُ الْأَسَاسِيَّة",
+      questions: [
+        {
+          ar: "عَكْسُ صِفَةِ «سَرِيع» هُوَ:",
+          en: "What is the opposite of 'سَرِيع' (fast)?",
+          options: [
+            { ar: "قَدِيم", en: "Old" },
+            { ar: "بَطِيء", en: "Slow" },
+            { ar: "صَغِير", en: "Small" },
+            { ar: "نَظِيف", en: "Clean" }
+          ],
+          ans: 1,
+          exp: "سَرِيع (fast) ↔ بَطِيء (slow)."
+        },
+        {
+          ar: "كَلِمَةُ «ذَكِيّ» تُطْلَقُ عَلَى الشَّخْصِ الَّذِي:",
+          en: "The adjective 'ذَكِيّ' describes a person who is:",
+          options: [
+            { ar: "Intelligent and quick to learn", en: "Intelligent" },
+            { ar: "Very tall and fast", en: "Tall" },
+            { ar: "Always tired", en: "Tired" },
+            { ar: "Quiet and calm", en: "Quiet" }
+          ],
+          ans: 0,
+          exp: "ذَكِيّ means intelligent or clever."
+        },
+        {
+          ar: "مَا هُوَ مُؤَنَّثُ صِفَةِ «نَظِيف»؟",
+          en: "What is the feminine singular form of 'نَظِيف' (clean)?",
+          options: [
+            { ar: "نَظَافَة", en: "Cleanliness" },
+            { ar: "نَظِيفَة", en: "Clean (fem.)" },
+            { ar: "أَنْظَف", en: "Cleaner" },
+            { ar: "مُنَظَّف", en: "Cleaned" }
+          ],
+          ans: 1,
+          exp: "نَظِيف takes Ta Marbutah to become نَظِيفَة."
+        },
+        {
+          ar: "«الْكِتَابُ ...... لِلطُّلَّابِ». اِخْتَرِ الصِّفَةَ الْمُنَاسِبَةَ:",
+          en: "Fill in the blank: 'Al-kitabu ... li-t-tullab' (The book is ... for students):",
+          options: [
+            { ar: "مُفِيدٌ", en: "Useful" },
+            { ar: "لَذِيذٌ", en: "Delicious" },
+            { ar: "بَطِيءٌ", en: "Slow" },
+            { ar: "سَاخِنٌ", en: "Hot" }
+          ],
+          ans: 0,
+          exp: "Books are described as مُفِيد (beneficial/useful)."
+        },
+        {
+          ar: "عَكْسُ صِفَةِ «نَظِيف» هُوَ:",
+          en: "What is the opposite of 'نَظِيف' (clean)?",
+          options: [
+            { ar: "قَدِيم", en: "Old" },
+            { ar: "وَسِخ", en: "Dirty" },
+            { ar: "كَبِير", en: "Big" },
+            { ar: "صَغِير", en: "Small" }
+          ],
+          ans: 1,
+          exp: "The opposite of clean (نَظِيف) is dirty (وَسِخ)."
+        }
+      ]
+    },
+    {
+      id: "w1_t9",
+      num: "Week 1 · Topic 9",
+      title: "Noun + Adjective Agreement",
+      titleAr: "اسْمٌ + صِفَة",
+      questions: [
+        {
+          ar: "مَا هُوَ الْفَرْقُ بَيْنَ «الْبَيْتُ الْكَبِيرُ» وَ «الْبَيْتُ كَبِيرٌ»؟",
+          en: "What is the difference between 'الْبَيْتُ الْكَبِيرُ' and 'الْبَيْتُ كَبِيرٌ'?",
+          options: [
+            { ar: "The first is a phrase ('the big house'); the second is a full sentence ('The house is big')", en: "Phrase vs sentence" },
+            { ar: "The first is feminine and the second is masculine", en: "Gender difference" },
+            { ar: "Both mean exactly the same with no grammatical difference", en: "No difference" },
+            { ar: "The second is a question", en: "Question" }
+          ],
+          ans: 0,
+          exp: "When the adjective has 'الـ', it forms a noun phrase (the big house). Without 'الـ', it is the predicate of a full sentence (The house is big)."
+        },
+        {
+          ar: "«غُرْفَةٌ ......». اِخْتَرِ الصِّفَةَ الْمُطَابِقَةَ قَوَاعِدِيًّا:",
+          en: "Choose the grammatically agreeing adjective for 'Ghurfatun ...' (a room):",
+          options: [
+            { ar: "كَبِيرٌ", en: "Kabir (Masc.)" },
+            { ar: "كَبِيرَةٌ", en: "Kabirah (Fem.)" },
+            { ar: "الْكَبِيرُ", en: "Al-kabir (Definite)" },
+            { ar: "أَكْبَرُ", en: "Akbar" }
+          ],
+          ans: 1,
+          exp: "غُرْفَة is feminine indefinite, requiring the feminine indefinite adjective كَبِيرَةٌ."
+        },
+        {
+          ar: "أَيُّ هَذِهِ التَّرَاكِيبِ صَحِيحٌ فِي دُخُولِ «الـ» التَّعْرِيفِ عَلَى الصِّفَةِ وَالْمَوْصُوفِ؟",
+          en: "Which of the following phrases is grammatically correct with the definite article 'al-'?",
+          options: [
+            { ar: "السَّيَّارَةُ الْجَدِيدَةُ", en: "As-sayyaratul-jadidah" },
+            { ar: "السَّيَّارَةُ جَدِيدَةُ", en: "Incorrect" },
+            { ar: "سَيَّارَةٌ الْجَدِيدَةُ", en: "Incorrect" },
+            { ar: "سَيَّارَةُ الْجَدِيدُ", en: "Incorrect" }
+          ],
+          ans: 0,
+          exp: "Both the noun and adjective must carry 'الـ' to form a definite descriptive phrase."
+        },
+        {
+          ar: "«امْرَأَةٌ ......». اِخْتَرِ الصِّفَةَ الصَّحِيحَةَ:",
+          en: "Choose the proper adjective for 'Imra'atun ...' (a woman):",
+          options: [
+            { ar: "لَطِيفٌ", en: "Latif" },
+            { ar: "لَطِيفَةٌ", en: "Latifah" },
+            { ar: "أَلْطَف", en: "Altaf" },
+            { ar: "اللَّطِيفُ", en: "Al-latif" }
+          ],
+          ans: 1,
+          exp: "امْرَأَة is feminine singular, matching with لَطِيفَةٌ."
+        },
+        {
+          ar: "جُمْلَةُ «الْكِتَابُ جَدِيدٌ» هِيَ:",
+          en: "'Al-kitabu jadidun' is grammatically:",
+          options: [
+            { ar: "A complete nominal sentence meaning 'The book is new'", en: "Complete nominal sentence" },
+            { ar: "An incomplete descriptive phrase", en: "Incomplete phrase" },
+            { ar: "A verbal sentence starting with a verb", en: "Verbal sentence" },
+            { ar: "A prepositional clause", en: "Prepositional clause" }
+          ],
+          ans: 0,
+          exp: "It consists of a subject (مبتدأ: الْكِتَابُ) and predicate (خبر: جَدِيدٌ), forming a complete nominal sentence."
+        }
+      ]
+    },
+    {
+      id: "w1_t10",
+      num: "Week 1 · Topic 10",
+      title: "Family Dialogue & Character",
+      titleAr: "حِوَارُ الْعَائِلَةِ وَالصِّفَاتُ الشَّخْصِيَّة",
+      questions: [
+        {
+          ar: "كَيْفَ تَسْأَلُ زَمِيلَكَ عَنْ عَدَدِ أَفْرَادِ عَائِلَتِهِ؟",
+          en: "How do you ask a classmate about the number of members in their family?",
+          options: [
+            { ar: "أَيْنَ تَسْكُنُ عَائِلَتُكَ؟", en: "Where does your family live?" },
+            { ar: "كَمْ شَخْصًا فِي عَائِلَتِكَ؟", en: "How many people are in your family?" },
+            { ar: "مَا هِوَايَةُ وَالِدِكَ؟", en: "What is your father's hobby?" },
+            { ar: "مَا اسْمُ أُخْتِكَ؟", en: "What is your sister's name?" }
+          ],
+          ans: 1,
+          exp: "'كَمْ شَخْصًا فِي عَائِلَتِكَ؟' asks for the number of people in the family."
+        },
+        {
+          ar: "«وَالِدِي رَجُلٌ هَادِئٌ». كَلِمَةُ «هَادِئ» تَعْنِي:",
+          en: "In 'My father is a calm man', the word 'هَادِئ' means:",
+          options: [
+            { ar: "Active", en: "Active" },
+            { ar: "Calm / Quiet / Peaceful", en: "Calm" },
+            { ar: "Strict", en: "Strict" },
+            { ar: "Angry", en: "Angry" }
+          ],
+          ans: 1,
+          exp: "هَادِئ means calm, quiet, or tranquil."
+        },
+        {
+          ar: "وَصْفُ الْأُمِّ بِأَنَّهَا «امْرَأَةٌ نَشِيطَةٌ» يَعْنِي أَنَّهَا:",
+          en: "Describing a mother as 'نَشِيطَة' means she is:",
+          options: [
+            { ar: "Energetic and active", en: "Energetic" },
+            { ar: "Very old", en: "Old" },
+            { ar: "Tired and sleeping", en: "Tired" },
+            { ar: "Slow in moving", en: "Slow" }
+          ],
+          ans: 0,
+          exp: "نَشِيطَة means active and energetic."
+        },
+        {
+          ar: "«أُخْتِي مَرِحَةٌ وَتُحِبُّ الْقِرَاءَةَ». «مَرِحَة» تَعْنِي:",
+          en: "The trait 'مَرِحَة' means:",
+          options: [
+            { ar: "Sad", en: "Sad" },
+            { ar: "Cheerful / Joyful", en: "Cheerful" },
+            { ar: "Lazy", en: "Lazy" },
+            { ar: "Strict", en: "Strict" }
+          ],
+          ans: 1,
+          exp: "مَرِحَة means cheerful and playful."
+        },
+        {
+          ar: "عِنْدَمَا يُعْجِبُكَ شَيْءٌ طَيِّبٌ فِي عَائِلَةِ صَاحِبِكَ، تَقُولُ:",
+          en: "When seeing something wonderful in a friend's family, you say:",
+          options: [
+            { ar: "عَفْوًا", en: "Afwan" },
+            { ar: "مَا شَاءَ اللَّهُ", en: "Masha'Allah" },
+            { ar: "إِلَى اللِّقَاءِ", en: "Ila l-liqa'" },
+            { ar: "لَا أَدْرِي", en: "I don't know" }
+          ],
+          ans: 1,
+          exp: "'مَا شَاءَ اللَّهُ' is the Islamic and Arabic formula praising Allah's blessing."
+        }
+      ]
+    },
+    {
+      id: "w1_t11",
+      num: "Week 1 · Topic 11",
+      title: "Picture Description: Home Evening",
+      titleAr: "صِفِ الصُّورَة: أَمْسِيَّةٌ فِي الْبَيْت",
+      questions: [
+        {
+          ar: "«الْجَدَّةُ تَشْرَبُ ...... فِي الْمَسَاءِ».",
+          en: "Complete: 'The grandmother drinks ... in the evening':",
+          options: [
+            { ar: "الْكِتَابَ", en: "Book" },
+            { ar: "الشَّايَ", en: "Tea" },
+            { ar: "الْكُرَةَ", en: "Ball" },
+            { ar: "الْحَاسُوبَ", en: "Computer" }
+          ],
+          ans: 1,
+          exp: "One drinks tea (الشَّايَ)."
+        },
+        {
+          ar: "«الْأَبُ يَطْبُخُ الطَّعَامَ». الْفِعْلُ «يَطْبُخُ» يَعْنِي:",
+          en: "The verb 'يَطْبُخُ' in Arabic means:",
+          options: [
+            { ar: "Cooks", en: "Cooks" },
+            { ar: "Eats", en: "Eats" },
+            { ar: "Washes", en: "Washes" },
+            { ar: "Writes", en: "Writes" }
+          ],
+          ans: 0,
+          exp: "يَطْبُخُ means cooks."
+        },
+        {
+          ar: "مَاذَا يَفْعَلُ الْوَلَدُ إِذَا كَانَ مَعَهُ كُرَةٌ فِي الْفِنَاءِ؟",
+          en: "What action does a boy do with a soccer ball?",
+          options: [
+            { ar: "يَقْرَأُ كِتَابًا", en: "Reads a book" },
+            { ar: "يَلْعَبُ بِالْكُرَةِ", en: "Plays with the ball" },
+            { ar: "يَطْبُخُ الْعَشَاءَ", en: "Cooks dinner" },
+            { ar: "يَنَامُ عَلَى السَّرِيرِ", en: "Sleeps" }
+          ],
+          ans: 1,
+          exp: "يَلْعَبُ بِالْكُرَةِ means 'plays with the ball'."
+        },
+        {
+          ar: "«الْأُمُّ تَعْمَلُ عَلَى الْحَاسُوبِ». «الْحَاسُوب» هُوَ:",
+          en: "'Al-hasoob' translates to:",
+          options: [
+            { ar: "Television", en: "TV" },
+            { ar: "Computer", en: "Computer" },
+            { ar: "Telephone", en: "Phone" },
+            { ar: "Notebook", en: "Notebook" }
+          ],
+          ans: 1,
+          exp: "حَاسُوب means computer."
+        },
+        {
+          ar: "كَيْفَ تَسْأَلُ عَمَّا يَفْعَلُهُ شَخْصٌ فِي صُورَةٍ؟",
+          en: "How do you formulate the question: 'What is he doing?'",
+          options: [
+            { ar: "مَاذَا يَفْعَلُ؟", en: "What is he doing?" },
+            { ar: "كَمْ عُمْرُهُ؟", en: "How old is he?" },
+            { ar: "أَيْنَ هُوَ مِنْ أَيْنَ؟", en: "Where is he from?" },
+            { ar: "مَا اسْمُ الطَّعَامِ؟", en: "What food?" }
+          ],
+          ans: 0,
+          exp: "'مَاذَا يَفْعَلُ؟' means 'What is he doing?'."
+        }
+      ]
+    }
+  ],
+
+  week2: [
+    {
+      id: "w2_t12",
+      num: "Week 2 · Topic 12",
+      title: "Daily-Routine Verbs",
+      titleAr: "أَفْعَالُ الرُّوتِينِ الْيَوْمِيّ",
+      questions: [
+        {
+          ar: "الْفِعْلُ «أَسْتَيْقِظُ» يَعْنِي:",
+          en: "The routine verb 'أَسْتَيْقِظُ' translates to:",
+          options: [
+            { ar: "I go to sleep", en: "I sleep" },
+            { ar: "I wake up", en: "I wake up" },
+            { ar: "I eat lunch", en: "I eat" },
+            { ar: "I read my lessons", en: "I read" }
+          ],
+          ans: 1,
+          exp: "أَسْتَيْقِظُ means 'I wake up'."
+        },
+        {
+          ar: "«أَتَنَاوَلُ الْفَطُورَ» تَعْنِي:",
+          en: "'Atanawalu al-fatoor' means:",
+          options: [
+            { ar: "I have / eat breakfast", en: "I eat breakfast" },
+            { ar: "I prepare tea", en: "I make tea" },
+            { ar: "I leave the house", en: "I leave" },
+            { ar: "I wash my face", en: "I wash" }
+          ],
+          ans: 0,
+          exp: "أَتَنَاوَلُ means 'I consume / have a meal'."
+        },
+        {
+          ar: "أَيُّ فِعْلٍ يُسْتَخْدَمُ مَعَ مُمَارَسَةِ الرِّيَاضَةِ؟",
+          en: "Which verb goes with sports (الرِّيَاضَة)?",
+          options: [
+            { ar: "أَرْجِعُ", en: "I return" },
+            { ar: "أُمَارِسُ", en: "I practice / exercise" },
+            { ar: "أَنَامُ", en: "I sleep" },
+            { ar: "أَشْرَبُ", en: "I drink" }
+          ],
+          ans: 1,
+          exp: "أُمَارِسُ الرِّيَاضَةَ means 'I practice sports'."
+        },
+        {
+          ar: "«أَرْجِعُ إِلَى الْبَيْتِ فِي الْمَسَاءِ». «أَرْجِعُ» تَعْنِي:",
+          en: "The verb 'أَرْجِعُ' in this context means:",
+          options: [
+            { ar: "I study", en: "I study" },
+            { ar: "I return / come back", en: "I return" },
+            { ar: "I speak", en: "I speak" },
+            { ar: "I wake up", en: "I wake up" }
+          ],
+          ans: 1,
+          exp: "أَرْجِعُ means 'I return / come back'."
+        },
+        {
+          ar: "عِنْدَمَا يُعِيدُ الطَّالِبُ قِرَاءَةَ الدُّرُوسِ لِحِفْظِهَا وَتَثْبِيتِهَا، يَقُولُ:",
+          en: "When a student reviews their lessons in the evening, they say:",
+          options: [
+            { ar: "أُرَاجِعُ دُرُوسِي", en: "I review my lessons" },
+            { ar: "أَتَنَاوَلُ طَعَامِي", en: "I eat my food" },
+            { ar: "أَسْتَيْقِظُ مَسَاءً", en: "I wake up" },
+            { ar: "أُمَارِسُ سَيَّارَتِي", en: "I drive" }
+          ],
+          ans: 0,
+          exp: "أُرَاجِعُ means 'I review / revise'."
+        }
+      ]
+    },
+    {
+      id: "w2_t13",
+      num: "Week 2 · Topic 13",
+      title: "Verb Conjugation: 4 Pronouns",
+      titleAr: "تَصْرِيفُ الْفِعْل: أَنَا · أَنْتَ · هُوَ · هِيَ",
+      questions: [
+        {
+          ar: "«هِيَ ...... الْكِتَابَ فِي الْمَكْتَبَةِ».",
+          en: "Fill in the blank with the 3rd person feminine singular present tense:",
+          options: [
+            { ar: "يَقْرَأُ", en: "Yaqra'u (He)" },
+            { ar: "تَقْرَأُ", en: "Taqra'u (She)" },
+            { ar: "أَقْرَأُ", en: "Aqra'u (I)" },
+            { ar: "نَقْرَأُ", en: "Naqra'u (We)" }
+          ],
+          ans: 1,
+          exp: "The pronoun هِيَ conjugates with the prefix Taa: هِيَ تَقْرَأُ."
+        },
+        {
+          ar: "«هُوَ ...... إِلَى الْجَامِعَةِ صَبَاحًا».",
+          en: "Fill in the blank for 'He goes':",
+          options: [
+            { ar: "أَذْهَبُ", en: "Adhhabu (I)" },
+            { ar: "يَذْهَبُ", en: "Yadhhabu (He)" },
+            { ar: "تَذْهَبُ", en: "Tadhhabu (She/You)" },
+            { ar: "نَذْهَبُ", en: "Nadhhabu (We)" }
+          ],
+          ans: 1,
+          exp: "The pronoun هُوَ conjugates with the prefix Yaa: هُوَ يَذْهَبُ."
+        },
+        {
+          ar: "صَحِّحِ الْخَطَأَ فِي: «أَنَا يَتَنَاوَلُ الطَّعَامَ»:",
+          en: "Correct the subject-verb agreement mistake in 'أَنَا يَتَنَاوَلُ':",
+          options: [
+            { ar: "أَنَا تَتَنَاوَلُ", en: "Incorrect" },
+            { ar: "أَنَا أَتَنَاوَلُ", en: "Ana atanawalu (Correct)" },
+            { ar: "أَنَا يَتَنَاوَلُونَ", en: "Incorrect" },
+            { ar: "أَنَا تَنَاوَلَتْ", en: "Incorrect" }
+          ],
+          ans: 1,
+          exp: "First person singular أَنَا takes prefix Hamza: أَنَا أَتَنَاوَلُ."
+        },
+        {
+          ar: "«أَنْتَ ...... الرِّيَاضَةَ كُلَّ يَوْمٍ».",
+          en: "Fill in for 'You (masc. singular) exercise':",
+          options: [
+            { ar: "يُمَارِسُ", en: "He" },
+            { ar: "تُمَارِسُ", en: "You (m)" },
+            { ar: "أُمَارِسُ", en: "I" },
+            { ar: "مَارَسَ", en: "Past" }
+          ],
+          ans: 1,
+          exp: "Second person masculine singular أَنْتَ takes prefix Taa: أَنْتَ تُمَارِسُ."
+        },
+        {
+          ar: "الْحَرْفُ الْأَوَّلُ فِي فِعْلِ الْمُضَارِعِ مَعَ الضَّمِيرِ «أَنَا» هُوَ دَائِمًا:",
+          en: "The first letter of a present-tense verb with 'أَنَا' is always:",
+          options: [
+            { ar: "الْيَاء (يـ)", en: "Yaa" },
+            { ar: "الْهَمْزَة (أَ)", en: "Hamza" },
+            { ar: "النُّون (نـ)", en: "Noon" },
+            { ar: "التَّاء (تـ)", en: "Taa" }
+          ],
+          ans: 1,
+          exp: "First person singular present verbs always begin with Hamza (أَنَا أَدْرُسُ، أَكْتُبُ)."
+        }
+      ]
+    },
+    {
+      id: "w2_t14",
+      num: "Week 2 · Topic 14",
+      title: "Nominal & Verbal Sentences",
+      titleAr: "جُمْلَةٌ اسْمِيَّةٌ وَجُمْلَةٌ فِعْلِيَّة",
+      questions: [
+        {
+          ar: "تَبْدَأُ الْجُمْلَةُ الِاسْمِيَّةُ دَائِمًا بِـ:",
+          en: "A nominal sentence (الجملة الاسمية) always begins with a:",
+          options: [
+            { ar: "فِعْلٍ", en: "Verb" },
+            { ar: "اسْمٍ", en: "Noun" },
+            { ar: "حَرْفِ جَرٍّ", en: "Preposition" },
+            { ar: "ظَرْفِ زَمَانٍ", en: "Adverb of time" }
+          ],
+          ans: 1,
+          exp: "By definition, a nominal sentence starts with a noun (اسم)."
+        },
+        {
+          ar: "فِي جُمْلَةِ «يَقْرَأُ الْوَلَدُ الْكِتَابَ»، حَرَكَةُ كَلِمَةِ «الْكِتَابَ» هِيَ الْفَتْحَةُ لِأَنَّهَا:",
+          en: "In 'يَقْرَأُ الْوَلَدُ الْكِتَابَ', why does 'الْكِتَابَ' end with a Fatha (-a)?",
+          options: [
+            { ar: "فَاعِلٌ", en: "Subject (Doer)" },
+            { ar: "مَفْعُولٌ بِهِ", en: "Direct object" },
+            { ar: "مُبْتَدَأٌ", en: "Topic" },
+            { ar: "صِفَةٌ", en: "Adjective" }
+          ],
+          ans: 1,
+          exp: "It is the direct object (مَفْعُول بِهِ) receiving the action, so it is in the accusative case (mansoob with fatha)."
+        },
+        {
+          ar: "أَيُّ الْجُمَلِ التَّالِيَةِ جُمْلَةٌ فِعْلِيَّةٌ؟",
+          en: "Which of the following is a verbal sentence (الجملة الفعلية)?",
+          options: [
+            { ar: "الْبَيْتُ كَبِيرٌ", en: "Nominal" },
+            { ar: "تَشْرَبُ الْبِنْتُ الْمَاءَ", en: "Tashrabu al-bintu al-ma'a (Verbal)" },
+            { ar: "الطَّالِبُ ذَكِيٌّ", en: "Nominal" },
+            { ar: "السَّيَّارَةُ سَرِيعَةٌ", en: "Nominal" }
+          ],
+          ans: 1,
+          exp: "'تَشْرَبُ الْبِنْتُ الْمَاءَ' starts with the verb تَشْرَبُ, making it a verbal sentence."
+        },
+        {
+          ar: "«الْوَلَدُ ......». كَمِّلْ لِتُصْبِحَ جُمْلَةً اسْمِيَّةً تَامَّةً مَرْفُوعَةً:",
+          en: "Complete the nominal sentence with a properly marked predicate:",
+          options: [
+            { ar: "ذَكِيٌّ", en: "Thakiyyun (Marfoo' with damma)" },
+            { ar: "ذَكِيًّا", en: "Mansoob" },
+            { ar: "ذَكِيٍّ", en: "Majroor" },
+            { ar: "الذَّكِيِّ", en: "Definite adjective" }
+          ],
+          ans: 0,
+          exp: "The predicate (خبر) of a nominal sentence is marfoo' with dammatayn: ذَكِيٌّ."
+        },
+        {
+          ar: "فِي جُمْلَةِ «يَأْكُلُ الْوَلَدُ الْخُبْزَ»، مَنْ هُوَ الْفَاعِلُ (The Doer)؟",
+          en: "In 'يَأْكُلُ الْوَلَدُ الْخُبْزَ', who is the doer / subject of the verb?",
+          options: [
+            { ar: "يَأْكُلُ", en: "The verb" },
+            { ar: "الْوَلَدُ", en: "Al-waladu (The boy)" },
+            { ar: "الْخُبْزَ", en: "The bread" },
+            { ar: "مَحْذُوفٌ", en: "Omitted" }
+          ],
+          ans: 1,
+          exp: "الْوَلَدُ carries the Damma marker representing the doer (فاعل)."
+        }
+      ]
+    },
+    {
+      id: "w2_t15",
+      num: "Week 2 · Topic 15",
+      title: "Conversation: Study & Free Time",
+      titleAr: "حِوَار: الدِّرَاسَةُ وَوَقْتُ الْفَرَاغِ",
+      questions: [
+        {
+          ar: "مَا مَعْنَى مُصْطَلَحِ «عِلْمُ الْحَاسُوبِ»؟",
+          en: "What does the academic major 'عِلْمُ الْحَاسُوبِ' mean?",
+          options: [
+            { ar: "Management", en: "Management" },
+            { ar: "Computer Science", en: "Computer Science" },
+            { ar: "Engineering", en: "Engineering" },
+            { ar: "Medicine", en: "Medicine" }
+          ],
+          ans: 1,
+          exp: "عِلْمُ الْحَاسُوبِ translates to Computer Science."
+        },
+        {
+          ar: "«أَدْرُسُ الْإِدَارَةَ وَالتَّنْمِيَةَ». «الْإِدَارَة» تَعْنِي:",
+          en: "'Al-idarah' refers to:",
+          options: [
+            { ar: "Management / Administration", en: "Management" },
+            { ar: "Mathematics", en: "Mathematics" },
+            { ar: "Geography", en: "Geography" },
+            { ar: "History", en: "History" }
+          ],
+          ans: 0,
+          exp: "إِدَارَة means management or administration."
+        },
+        {
+          ar: "مَا هُوَ السُّؤَالُ عَنْ كَيْفِيَّةِ قَضَاءِ الْوَقْتِ غَيْرِ الْمَشْغُولِ؟",
+          en: "Which question asks: 'What do you do in your free time?'",
+          options: [
+            { ar: "كَمْ عُمْرُكَ؟", en: "How old are you?" },
+            { ar: "مَاذَا تَفْعَلُ فِي وَقْتِ فَرَاغِكَ؟", en: "What do you do in your free time?" },
+            { ar: "أَيْنَ تَسْكُنُ؟", en: "Where do you live?" },
+            { ar: "مَا هُوَ اسْمُكَ؟", en: "What is your name?" }
+          ],
+          ans: 1,
+          exp: "'مَاذَا تَفْعَلُ فِي وَقْتِ فَرَاغِكَ؟' asks about free-time activities."
+        },
+        {
+          ar: "«أُحِبُّ دِرَاسَتِي ...... مُفِيدَةٌ». اِخْتَرِ كَلِمَةَ التَّعْلِيلِ:",
+          en: "Choose the word expressing reason ('because it is ...'):",
+          options: [
+            { ar: "ثُمَّ", en: "Then" },
+            { ar: "لِأَنَّهَا", en: "Because it is" },
+            { ar: "هَلْ", en: "Is it?" },
+            { ar: "أَيْنَ", en: "Where" }
+          ],
+          ans: 1,
+          exp: "لِأَنَّهَا introduces a cause or justification ('because it is...')."
+        },
+        {
+          ar: "عِبَارَةُ «وَقْتُ الْفَرَاغِ» تُتَرْجَمُ إِلَى الْإِنْجْلِيزِيَّةِ بِـ:",
+          en: "The expression 'وَقْتُ الْفَرَاغِ' means:",
+          options: [
+            { ar: "Free time / Leisure time", en: "Free time" },
+            { ar: "Exam week", en: "Exam week" },
+            { ar: "Working hours", en: "Work hours" },
+            { ar: "Morning lecture", en: "Lecture" }
+          ],
+          ans: 0,
+          exp: "وَقْت الْفَرَاغ translates to free time / leisure time."
+        }
+      ]
+    },
+    {
+      id: "w2_t16",
+      num: "Week 2 · Topic 16",
+      title: "Daily Story: My Study Day",
+      titleAr: "الْقِصَّةُ الْيَوْمِيَّة: يَوْمِي الدِّرَاسِيّ",
+      questions: [
+        {
+          ar: "كَلِمَةُ «مُبَكِّرًا» تَعْنِي:",
+          en: "The time expression 'مُبَكِّرًا' means:",
+          options: [
+            { ar: "Late", en: "Late" },
+            { ar: "Early in the morning", en: "Early" },
+            { ar: "Yesterday", en: "Yesterday" },
+            { ar: "Tomorrow", en: "Tomorrow" }
+          ],
+          ans: 1,
+          exp: "مُبَكِّرًا means early."
+        },
+        {
+          ar: "أَيْنَ يَذْهَبُ الطَّالِبُ بَعْدَ الْمُحَاضَرَاتِ لِقِرَاءَةِ الْكُتُبِ؟",
+          en: "Where does the student head after lectures to read books?",
+          options: [
+            { ar: "إِلَى الْمَكْتَبَةِ", en: "To the library" },
+            { ar: "إِلَى الْمَلْعَبِ", en: "To the stadium" },
+            { ar: "إِلَى السُّوقِ", en: "To the market" },
+            { ar: "إِلَى الْمَطَارِ", en: "To the airport" }
+          ],
+          ans: 0,
+          exp: "مَكْتَبَة means library."
+        },
+        {
+          ar: "«عِنْدِي مُحَاضَرَاتٌ مُهِمَّةٌ». «مُحَاضَرَات» تَعْنِي:",
+          en: "'Muhadarat' in university life means:",
+          options: [
+            { ar: "Meals", en: "Meals" },
+            { ar: "Lectures / Classes", en: "Lectures" },
+            { ar: "Books", en: "Books" },
+            { ar: "Sports", en: "Sports" }
+          ],
+          ans: 1,
+          exp: "مُحَاضَرَات means academic lectures."
+        },
+        {
+          ar: "وَصْفُ الْيَوْمِ بِأَنَّهُ «مُتْعِبٌ» يَعْنِي أَنَّهُ:",
+          en: "Describing a day as 'مُتْعِب' means it was:",
+          options: [
+            { ar: "Short and relaxing", en: "Relaxing" },
+            { ar: "Tiring / Exhausting", en: "Tiring" },
+            { ar: "Cold and windy", en: "Cold" },
+            { ar: "Delicious", en: "Delicious" }
+          ],
+          ans: 1,
+          exp: "مُتْعِب means fatiguing, tiring, or strenuous."
+        },
+        {
+          ar: "«أَنَا ...... لِلِامْتِحَانِ». اِخْتَرِ الْكَلِمَةَ الَّتِي تَعْنِي (Ready / Prepared):",
+          en: "Choose the word meaning 'ready / prepared':",
+          options: [
+            { ar: "بَطِيءٌ", en: "Slow" },
+            { ar: "مُسْتَعِدٌّ", en: "Ready / Prepared" },
+            { ar: "قَدِيمٌ", en: "Old" },
+            { ar: "صَغِيرٌ", en: "Small" }
+          ],
+          ans: 1,
+          exp: "مُسْتَعِدّ means ready or prepared."
+        }
+      ]
+    }
+  ]
+};
+
+/* =========================================================================
+   APPLICATION STATE & CONTROLLER
+   ========================================================================= */
+const state = {
+  currentTrack: "beginner",
+  studentName: localStorage.getItem("natik_student_name") || "",
+  scores: JSON.parse(localStorage.getItem("natik_quiz_scores") || "{}"),
+  activeUnit: null,
+  qIdx: 0,
+  unitScore: 0,
+  selectedOption: null
+};
+
+// Elements
+const viewDashboard = document.getElementById("view-dashboard");
+const viewQuiz = document.getElementById("view-quiz");
+const viewResult = document.getElementById("view-result");
+const nameModal = document.getElementById("name-modal");
+const nameInput = document.getElementById("name-input");
+const saveNameBtn = document.getElementById("save-name-btn");
+const studentBtn = document.getElementById("student-btn");
+const headerStudentName = document.getElementById("header-student-name");
+
+const subtopicsList = document.getElementById("subtopics-list");
+const trackHeading = document.getElementById("track-heading");
+const trackDesc = document.getElementById("track-desc");
+const passedCountEl = document.getElementById("passed-count");
+
+// Quiz Elements
+const quizBackBtn = document.getElementById("quiz-back-btn");
+const qCounterText = document.getElementById("q-counter-text");
+const quizProgressThumb = document.getElementById("quiz-progress-thumb");
+const currentUnitNum = document.getElementById("current-unit-num");
+const currentUnitTitle = document.getElementById("current-unit-title");
+const currentUnitAr = document.getElementById("current-unit-ar");
+const quizQAr = document.getElementById("quiz-q-ar");
+const quizQEn = document.getElementById("quiz-q-en");
+const quizOptionsStack = document.getElementById("quiz-options-stack");
+const quizExplanation = document.getElementById("quiz-explanation");
+const quizExplanationText = document.getElementById("quiz-explanation-text");
+const quizLiveScore = document.getElementById("quiz-live-score");
+const quizNextBtn = document.getElementById("quiz-next-btn");
+
+// Result Elements
+const resStudentName = document.getElementById("res-student-name");
+const resUnitTitle = document.getElementById("res-unit-title");
+const resScoreNum = document.getElementById("res-score-num");
+const resEvalPill = document.getElementById("res-eval-pill");
+const resDateStamp = document.getElementById("res-date-stamp");
+const resCertId = document.getElementById("res-cert-id");
+const resRetakeBtn = document.getElementById("res-retake-btn");
+const resDashboardBtn = document.getElementById("res-dashboard-btn");
+
+// Initialize
+function init() {
+  if (!state.studentName) {
+    nameModal.style.display = "flex";
+  } else {
+    headerStudentName.textContent = state.studentName;
+  }
+  setupEvents();
+  renderDashboard();
+}
+
+function setupEvents() {
+  // Name modal
+  saveNameBtn.addEventListener("click", () => {
+    const val = nameInput.value.trim();
+    if (!val) {
+      alert("Please enter your name!");
+      return;
+    }
+    state.studentName = val;
+    localStorage.setItem("natik_student_name", val);
+    headerStudentName.textContent = val;
+    nameModal.style.display = "none";
+  });
+
+  studentBtn.addEventListener("click", () => {
+    nameInput.value = state.studentName;
+    nameModal.style.display = "flex";
+  });
+
+  // Track tabs
+  document.querySelectorAll(".tab-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      state.currentTrack = btn.dataset.track;
+      renderDashboard();
+    });
+  });
+
+  // Quiz navigation
+  quizBackBtn.addEventListener("click", () => {
+    if (confirm("Return to topics? Current progress in this part will not be saved.")) {
+      showView("dashboard");
+    }
+  });
+
+  quizNextBtn.addEventListener("click", handleNextQuestion);
+
+  // Result navigation
+  resRetakeBtn.addEventListener("click", () => {
+    startSubtopic(state.activeUnit);
+  });
+  resDashboardBtn.addEventListener("click", () => {
+    showView("dashboard");
+  });
+}
+
+function showView(name) {
+  viewDashboard.style.display = name === "dashboard" ? "block" : "none";
+  viewQuiz.style.display = name === "quiz" ? "block" : "none";
+  viewResult.style.display = name === "result" ? "block" : "none";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderDashboard() {
+  const units = curriculum[state.currentTrack];
+  
+  if (state.currentTrack === "beginner") {
+    trackHeading.textContent = "Beginner Assessment Units";
+    trackDesc.textContent = "Fundamental Arabic: greetings, pronouns, demonstratives, and basics.";
+  } else if (state.currentTrack === "week1") {
+    trackHeading.textContent = "Intermediate Track · Week 1";
+    trackDesc.textContent = "Everyday vocabulary in context, description, food, colors, clothes, and family.";
+  } else {
+    trackHeading.textContent = "Intermediate Track · Week 2";
+    trackDesc.textContent = "Daily routine verbs, conjugation, nominal/verbal sentences, and study story.";
+  }
+
+  // Count total passed across all 21 units
+  let passedCount = 0;
+  Object.values(state.scores).forEach(score => {
+    if (score >= 4) passedCount++;
+  });
+  passedCountEl.textContent = passedCount;
+
+  subtopicsList.innerHTML = "";
+  units.forEach(u => {
+    const card = document.createElement("div");
+    const savedScore = state.scores[u.id];
+    const isCompleted = savedScore !== undefined;
+    const isPass = savedScore >= 4;
+
+    card.className = "subtopic-card" + (isCompleted ? " completed" : "");
+    card.innerHTML = `
+      <div>
+        <div class="st-num">${u.num}</div>
+        <div class="st-title-ar ar">${u.titleAr}</div>
+        <div class="st-title-en">${u.title}</div>
+      </div>
+      <div class="st-footer">
+        <span class="badge-score ${isPass ? 'pass' : ''}">
+          ${isCompleted ? savedScore + ' / 5 ' + (isPass ? '⭐' : '') : '5 Questions'}
+        </span>
+        <button class="btn-start">${isCompleted ? 'Review / Retake' : 'Start Assessment'}</button>
+      </div>
+    `;
+
+    card.querySelector(".btn-start").addEventListener("click", () => {
+      startSubtopic(u);
+    });
+
+    subtopicsList.appendChild(card);
+  });
+}
+
+function startSubtopic(unit) {
+  state.activeUnit = unit;
+  state.qIdx = 0;
+  state.unitScore = 0;
+  state.selectedOption = null;
+
+  currentUnitNum.textContent = unit.num;
+  currentUnitTitle.textContent = unit.title;
+  currentUnitAr.textContent = unit.titleAr;
+
+  showView("quiz");
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = state.activeUnit.questions[state.qIdx];
+  const total = state.activeUnit.questions.length;
+
+  qCounterText.textContent = `Question ${state.qIdx + 1} of ${total}`;
+  quizProgressThumb.style.width = `${((state.qIdx + 1) / total) * 100}%`;
+
+  quizQAr.textContent = q.ar;
+  quizQEn.textContent = q.en;
+
+  quizExplanation.style.display = "none";
+  quizNextBtn.disabled = true;
+  quizNextBtn.textContent = state.qIdx === total - 1 ? "Finish & Grade 🏁" : "Next Question →";
+  quizLiveScore.textContent = `Score: ${state.unitScore} / ${state.qIdx}`;
+
+  quizOptionsStack.innerHTML = "";
+  const chars = ["A", "B", "C", "D"];
+
+  q.options.forEach((opt, idx) => {
+    const btn = document.createElement("div");
+    btn.className = "option-btn";
+    btn.innerHTML = `
+      <div class="opt-char">${chars[idx]}</div>
+      <div class="opt-content">
+        <span class="opt-content-ar ar">${opt.ar}</span>
+        <span class="opt-content-en">${opt.en}</span>
+      </div>
+    `;
+
+    btn.addEventListener("click", () => {
+      if (state.selectedOption !== null) return; // locked
+      handleOptionSelect(idx, btn, q);
+    });
+
+    quizOptionsStack.appendChild(btn);
+  });
+}
+
+function handleOptionSelect(chosenIdx, chosenBtn, q) {
+  state.selectedOption = chosenIdx;
+  const isCorrect = chosenIdx === q.ans;
+  const allBtns = quizOptionsStack.querySelectorAll(".option-btn");
+
+  allBtns.forEach((b, i) => {
+    b.classList.add("locked");
+    if (i === q.ans) {
+      b.classList.add("correct-feedback");
+    } else if (i === chosenIdx) {
+      b.classList.add("wrong-feedback");
+    }
+  });
+
+  if (isCorrect) {
+    state.unitScore++;
+  }
+
+  quizLiveScore.textContent = `Score: ${state.unitScore} / ${state.qIdx + 1}`;
+
+  // Show explanation
+  quizExplanationText.textContent = q.exp;
+  quizExplanation.style.display = "block";
+  quizNextBtn.disabled = false;
+}
+
+function handleNextQuestion() {
+  const total = state.activeUnit.questions.length;
+  if (state.qIdx < total - 1) {
+    state.qIdx++;
+    state.selectedOption = null;
+    renderQuestion();
+  } else {
+    showCertificate();
+  }
+}
+
+function showCertificate() {
+  const score = state.unitScore;
+  const total = state.activeUnit.questions.length;
+  const pct = Math.round((score / total) * 100);
+
+  // Save to persistent storage
+  state.scores[state.activeUnit.id] = score;
+  localStorage.setItem("natik_quiz_scores", JSON.stringify(state.scores));
+
+  resStudentName.textContent = state.studentName || "Natik Student";
+  resUnitTitle.textContent = `${state.activeUnit.num}: ${state.activeUnit.title} · ${state.activeUnit.titleAr}`;
+  resScoreNum.textContent = score;
+
+  if (score >= 4) {
+    resEvalPill.className = "cert-eval-pill eval-pass";
+    resEvalPill.textContent = `مُمْتَاز · Distinction (${pct}%)`;
+  } else {
+    resEvalPill.className = "cert-eval-pill eval-retry";
+    resEvalPill.textContent = `يَحْتَاجُ إِلَى مُرَاجَعَة · Review Suggested (${pct}%)`;
+  }
+
+  const now = new Date();
+  resDateStamp.textContent = "Date: " + now.toLocaleDateString() + " · " + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  resCertId.textContent = "ID: NTK-" + Math.floor(100000 + Math.random() * 900000);
+
+  showView("result");
+}
+
+// Start
+init();
+</script>
+</body>
+</html>
